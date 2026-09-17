@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#121212">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LookMax Hub">
+<title>LookMax & Training Hub</title>
+
+<style>
+:root{
+  --bg:#121212;
+  --card:#1c1c1e;
+  --card2:#242426;
+  --text:#f5f5f7;
+  --muted:#a1a1a6;
+  --blue:#0a84ff;
+  --green:#30d158;
+  --orange:#ff9f0a;
+  --red:#ff453a;
+  --purple:#bf5af2;
+  --border:rgba(255,255,255,.08);
+  --radius:20px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif;
+  line-height:1.45;
+  padding-bottom:100px;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{max-width:760px;margin:auto;padding:0 16px}
+header{
+  padding:calc(env(safe-area-inset-top) + 22px) 4px 18px;
+}
+.eyebrow{
+  color:var(--blue);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+h1{font-size:32px;line-height:1.1;margin:5px 0 7px;letter-spacing:-1px}
+h2{font-size:22px;margin:0 0 12px;letter-spacing:-.4px}
+h3{font-size:16px;margin:0 0 5px}
+p{margin:5px 0}
+.muted{color:var(--muted)}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:17px;
+  margin-bottom:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,.16);
+}
+.hero{
+  background:linear-gradient(145deg,#1c1c1e,#182230);
+  border-color:rgba(10,132,255,.2);
+}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{
+  background:var(--card2);
+  border-radius:16px;
+  padding:13px;
+}
+.stat strong{display:block;font-size:21px}
+.stat span{font-size:12px;color:var(--muted)}
+.progress{
+  height:8px;background:#343438;border-radius:20px;overflow:hidden;margin:10px 0 4px
+}
+.progress>div{height:100%;background:var(--blue);border-radius:20px;transition:.3s}
+.nav{
+  position:fixed;
+  z-index:50;
+  bottom:0;left:0;right:0;
+  background:rgba(28,28,30,.94);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  padding:8px 8px calc(8px + env(safe-area-inset-bottom));
+  display:flex;
+  justify-content:center;
+  gap:5px;
+}
+.nav button{
+  flex:1;max-width:140px;
+  border:0;background:transparent;color:var(--muted);
+  padding:8px 5px;border-radius:13px;font-size:12px;font-weight:600;
+}
+.nav button.active{background:#303033;color:var(--text)}
+.nav-icon{display:block;font-size:19px;margin-bottom:1px}
+.section{display:none}
+.section.active{display:block}
+.daybar{
+  display:flex;gap:7px;overflow-x:auto;padding:3px 1px 12px;
+  scrollbar-width:none;
+}
+.daybar::-webkit-scrollbar{display:none}
+.day{
+  min-width:54px;border:1px solid var(--border);background:var(--card);
+  color:var(--muted);border-radius:15px;padding:9px 5px;text-align:center;
+}
+.day strong{display:block;color:inherit}
+.day small{font-size:10px}
+.day.active{background:var(--blue);color:white;border-color:var(--blue)}
+.exercise{
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.exercise:last-child{border-bottom:0;padding-bottom:0}
+.exercise-top{display:flex;gap:10px;align-items:flex-start}
+.check{
+  appearance:none;width:25px;height:25px;min-width:25px;
+  border:2px solid #636366;border-radius:8px;margin-top:1px;
+  position:relative;background:transparent;
+}
+.check:checked{background:var(--green);border-color:var(--green)}
+.check:checked:after{
+  content:"✓";position:absolute;color:#061b0b;font-weight:900;
+  left:4px;top:-1px;font-size:17px;
+}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.tag{
+  background:#2b2b2e;color:#d1d1d6;border-radius:8px;
+  padding:4px 7px;font-size:11px;
+}
+.tag.blue{color:#64b5ff;background:rgba(10,132,255,.12)}
+.tag.green{color:#65e88a;background:rgba(48,209,88,.1)}
+.tip{
+  margin-top:8px;background:#242426;border-radius:11px;
+  padding:9px 10px;color:#c7c7cc;font-size:13px;
+}
+.tip b{color:var(--text)}
+.selector{
+  display:flex;background:#242426;border-radius:12px;padding:3px;margin-bottom:12px
+}
+.selector button{
+  flex:1;border:0;background:transparent;color:var(--muted);
+  border-radius:9px;padding:8px;font-weight:600;font-size:13px
+}
+.selector button.active{background:#3a3a3c;color:white}
+.meal{
+  padding:13px 0;border-bottom:1px solid var(--border);
+}
+.meal:last-child{border-bottom:0}
+.meal-title{display:flex;justify-content:space-between;gap:10px}
+.meal-title strong{font-size:15px}
+.kcal{color:var(--orange);font-size:12px;font-weight:700}
+.food{font-size:13px;color:#d1d1d6;margin-top:4px}
+.note{font-size:12px;color:var(--muted);margin-top:6px}
+.checkrow{
+  display:flex;align-items:center;gap:10px;padding:10px 0;
+  border-bottom:1px solid var(--border);
+}
+.checkrow:last-child{border-bottom:0}
+.water{
+  display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-top:12px
+}
+.water button{
+  aspect-ratio:1;border:1px solid #3a3a3c;border-radius:11px;
+  background:#242426;color:#777;font-size:16px
+}
+.water button.done{background:var(--blue);border-color:var(--blue);color:white}
+.big-number{font-size:36px;font-weight:800;letter-spacing:-1px}
+.accent{color:var(--blue)}
+.green{color:var(--green)}
+.warning{
+  border-left:3px solid var(--orange);
+  background:rgba(255,159,10,.08);
+}
+.info{
+  border-left:3px solid var(--blue);
+  background:rgba(10,132,255,.07);
+}
+.danger{
+  border-left:3px solid var(--red);
+  background:rgba(255,69,58,.07);
+}
+details{border-top:1px solid var(--border);padding:12px 0}
+details:first-child{border-top:0}
+summary{font-weight:700;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"＋";float:right;color:var(--muted)}
+details[open] summary:after{content:"−"}
+ul{padding-left:20px}
+li{margin:7px 0}
+.small{font-size:12px}
+footer{text-align:center;color:#666;font-size:11px;padding:15px 0 25px}
+.reset{
+  border:1px solid #444;background:transparent;color:#aaa;
+  border-radius:10px;padding:8px 11px;font-size:12px
+}
+@media(min-width:600px){
+  .app{padding:0 22px}
+  .exercise{padding:16px 4px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>
+  <div class="eyebrow">Personal Performance System</div>
+  <h1>LookMax & Training Hub</h1>
+  <p class="muted">Lean recomp • V-taper • skin • grooming • consistency</p>
+</header>
+
+<!-- ===================== WORKOUT ===================== -->
+<section id="workout" class="section active">
+
+  <div class="card hero">
+    <div class="eyebrow">Current target</div>
+    <h2>Lean Athletic V-Taper</h2>
+    <p class="muted">
+      Build side delts, lats, upper chest, rear delts and arms while gradually
+      improving waist definition.
+    </p>
+    <div class="grid2" style="margin-top:13px">
+      <div class="stat"><strong>72 kg</strong><span>Current bodyweight</span></div>
+      <div class="stat"><strong>5'8"</strong><span>Height</span></div>
+      <div class="stat"><strong>130–145 g</strong><span>Protein/day</span></div>
+      <div class="stat"><strong>4 days</strong><span>Weight training/week</span></div>
+    </div>
+  </div>
+
+  <div class="daybar" id="dayBar"></div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div class="eyebrow" id="workoutLabel">Monday</div>
+        <h2 id="workoutTitle">Push</h2>
+      </div>
+      <div style="text-align:right">
+        <div class="big-number" id="workoutPercent">0%</div>
+        <div class="small muted">complete</div>
+      </div>
+    </div>
+    <div class="progress"><div id="workoutProgress" style="width:0%"></div></div>
+  </div>
+
+  <div id="exerciseList"></div>
+
+  <div class="card info">
+    <h3>Progressive overload rule</h3>
+    <p class="small">
+      Stay within the prescribed rep range. When you can complete the top of
+      the range on every set with clean form, increase the load slightly.
+      Keep roughly 1–3 good reps in reserve on most working sets.
+    </p>
+  </div>
+
+</section>
+
+<!-- ===================== MEALS ===================== -->
+<section id="meals" class="section">
+
+  <div class="card hero">
+    <div class="eyebrow">Nutrition target</div>
+    <h2>Lean Recomposition</h2>
+    <p class="muted">
+      Start around maintenance rather than using a bulk. Adjust portions only
+      after observing your 2–4 week weight and waist trend.
+    </p>
+    <div class="grid2" style="margin-top:13px">
+      <div class="stat"><strong>2,200–2,400</strong><span>kcal/day starting range</span></div>
+      <div class="stat"><strong>130–145 g</strong><span>protein/day</span></div>
+      <div class="stat"><strong>250–280 g</strong><span>carbs/day approx.</span></div>
+      <div class="stat"><strong>60–75 g</strong><span>fat/day approx.</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Daily hydration</h2>
+    <div class="big-number"><span id="waterCount">0</span><span class="small muted"> / 8 cups</span></div>
+    <p class="small muted">Use the buttons as a simple hydration tracker. Adjust fluid intake for heat, sweating and individual needs.</p>
+    <div class="water" id="waterButtons"></div>
+  </div>
+
+  <div class="daybar" id="mealDayBar"></div>
+  <div class="card">
+    <div class="eyebrow" id="mealDayLabel">Monday</div>
+    <h2 id="mealDayTitle">Push Day</h2>
+    <div id="mealList"></div>
+  </div>
+
+  <div class="card">
+    <h2>Daily nutrition checklist</h2>
+    <div id="mealChecklist"></div>
+  </div>
+
+  <div class="card">
+    <h2>Simple meal-prep system</h2>
+
+    <details open>
+      <summary>Sunday prep</summary>
+      <ul class="small">
+        <li>Cook a batch of rajma and dal/pappu.</li>
+        <li>Prepare egg curry/bhurji for several meals.</li>
+        <li>Cook rice in measured portions and refrigerate promptly.</li>
+        <li>Portion chicken into <b>180–200 g raw</b> servings and freeze what will not be used soon.</li>
+        <li>Move the next day's chicken from freezer to refrigerator the night before.</li>
+        <li>Keep chopped onion, tomato, lettuce and other vegetables ready.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Food-scale rules</summary>
+      <ul class="small">
+        <li><b>Chicken:</b> 180–200 g raw per main serving.</li>
+        <li><b>Rice:</b> 150–200 g cooked per serving.</li>
+        <li><b>Oats:</b> 60 g dry.</li>
+        <li><b>Paneer:</b> about 100 g when used.</li>
+        <li><b>Rajma:</b> about 200 g cooked.</li>
+        <li><b>Dal:</b> about 250 g cooked.</li>
+        <li><b>Curd:</b> 150–200 g.</li>
+        <li><b>Nuts:</b> 15–20 g.</li>
+        <li><b>Granola:</b> 25–30 g; treat it as a topping because it is calorie-dense.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Rice vs oats vs chapati</summary>
+      <p class="small">
+        You do not need to eliminate rice. Oats work well at breakfast, rice
+        works well around lunch/training, and chapati is a convenient dinner
+        carbohydrate. Body-fat change is primarily driven by overall energy
+        balance, not by eliminating one carbohydrate.
+      </p>
+    </details>
+
+    <details>
+      <summary>Chicken & the "body heat" concern</summary>
+      <p class="small">
+        There is no good evidence that chicken inherently "heats" the body.
+        Since you noticed itchy bumps during a period of frequent chicken
+        meals, the dashboard rotates chicken with eggs, dal and rajma rather
+        than making chicken your only protein source. If a repeatable food
+        reaction occurs, discuss it with a clinician rather than assuming it
+        is simply "heat."
+      </p>
+    </details>
+  </div>
+
+</section>
+
+<!-- ===================== LOOKMAX ===================== -->
+<section id="lookmax" class="section">
+
+  <div class="card hero">
+    <div class="eyebrow">Aesthetics protocol</div>
+    <h2>Clean, Healthy, Athletic</h2>
+    <p class="muted">
+      The goal is not extreme dieting or gimmicks. Build muscle, keep body fat
+      controlled, protect skin from UV, maintain good grooming and sleep.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>☀️ Morning skincare</h2>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="skin-am-cleanser">
+      <div><b>1. Gentle cleanse</b><div class="small muted">Use a non-irritating cleanser; don't scrub aggressively.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="skin-am-active">
+      <div><b>2. Optional antioxidant/brightening active</b><div class="small muted">Use only an active your skin already tolerates.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="skin-am-moist">
+      <div><b>3. Moisturizer</b><div class="small muted">Apply enough to keep the skin comfortable and hydrated.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="skin-am-spf">
+      <div><b>4. Broad-spectrum SPF 30+ sunscreen</b><div class="small muted">Apply generously and reapply when appropriate for prolonged outdoor exposure.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🌙 Evening skincare</h2>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="skin-pm-clean">
+      <div><b>1. Remove sunscreen/impurities</b><div class="small muted">Cleanse gently; avoid repeated harsh washing.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="skin-pm-active">
+      <div><b>2. One active at a time</b><div class="small muted">Retinoid/BHA/other actives should not be stacked indiscriminately. Introduce slowly.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="skin-pm-moist">
+      <div><b>3. Moisturizer</b><div class="small muted">Prioritize barrier comfort over using more products.</div></div>
+    </div>
+  </div>
+
+  <div class="card warning">
+    <h3>Skin rule: don't chase irritation</h3>
+    <p class="small">
+      More acids, retinoids or products do not automatically mean better skin.
+      If an active causes persistent burning, swelling, severe redness or a
+      worsening rash, stop the offending product and seek professional advice.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>🧍 Posture & presence</h2>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="posture">
+      <div><b>2-minute posture reset</b><div class="small muted">Chin gently tucked, ribs stacked over pelvis, shoulders relaxed rather than forced backward.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="screen">
+      <div><b>Screen ergonomics</b><div class="small muted">Bring the screen closer to eye level and avoid spending hours with the neck bent forward.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="walk">
+      <div><b>Daily walking</b><div class="small muted">Regular movement supports general fitness and helps offset long desk periods.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>💇 Grooming protocol</h2>
+    <ul class="small">
+      <li><b>Hair:</b> Keep the sides/back clean and choose a shape that works with your natural hair texture.</li>
+      <li><b>Beard:</b> Keep neckline and cheek boundaries intentional; maintain consistent length.</li>
+      <li><b>Brows:</b> Clean obvious stray hairs without aggressively changing the natural shape.</li>
+      <li><b>Teeth:</b> Brush twice daily with fluoride toothpaste and clean between teeth daily.</li>
+      <li><b>Lips:</b> Use a simple moisturizing lip product when dry; SPF lip protection is useful outdoors.</li>
+      <li><b>Body:</b> Shower after heavy sweating and change out of sweaty clothing.</li>
+      <li><b>Nails:</b> Keep fingernails/toenails clean and trimmed.</li>
+      <li><b>Clothing:</b> Proper shoulder fit and clean, well-fitted basics can immediately improve presentation.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>😴 Daily habits</h2>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="sleep">
+      <div><b>7–9 hours sleep</b><div class="small muted">Consistent sleep/wake timing when practical.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="protein">
+      <div><b>Hit protein target</b><div class="small muted">130–145 g/day target.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="sun">
+      <div><b>UV protection</b><div class="small muted">Sunscreen + sensible shade/clothing for prolonged exposure.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="creatine">
+      <div><b>Supplement routine</b><div class="small muted">If using creatine, use a standard evidence-based regimen and discuss supplements with a clinician/pharmacist if you have medical concerns.</div></div>
+    </div>
+
+    <div class="checkrow">
+      <input class="check habit" type="checkbox" data-key="groom">
+      <div><b>Grooming completed</b><div class="small muted">Hair/beard/teeth/body basics.</div></div>
+    </div>
+  </div>
+
+  <div class="card danger">
+    <h3>When to get skin symptoms checked</h3>
+    <p class="small">
+      Recurrent itchy bumps, hives, persistent peeling, significant swelling,
+      painful lesions or symptoms that repeatedly follow a food/product should
+      be evaluated rather than self-treating indefinitely. Trouble breathing
+      or swelling of the lips/tongue/throat is an emergency.
+    </p>
+  </div>
+
+</section>
+
+<!-- ===================== PROGRESS ===================== -->
+<section id="progress" class="section">
+
+  <div class="card hero">
+    <div class="eyebrow">12-week system</div>
+    <h2>Measure the trend, not the mirror</h2>
+    <p class="muted">
+      Daily weight fluctuates. Use weekly averages and consistent photos.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Progress principles</h2>
+    <div class="grid2">
+      <div class="stat"><strong>↑</strong><span>Gym strength</span></div>
+      <div class="stat"><strong>↑</strong><span>Shoulder/back size</span></div>
+      <div class="stat"><strong>↓</strong><span>Waist trend</span></div>
+      <div class="stat"><strong>≈</strong><span>Bodyweight initially</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Weekly check-in</h2>
+
+    <label class="small muted">Morning bodyweight (kg)</label>
+    <input id="weightInput" type="number" step="0.1" min="30" max="200"
+      placeholder="e.g. 72.0"
+      style="width:100%;margin:7px 0 12px;padding:12px;border-radius:12px;border:1px solid #444;background:#242426;color:white">
+
+    <label class="small muted">Waist measurement (cm)</label>
+    <input id="waistInput" type="number" step="0.1" min="40" max="200"
+      placeholder="Measure at the same location each week"
+      style="width:100%;margin:7px 0 12px;padding:12px;border-radius:12px;border:1px solid #444;background:#242426;color:white">
+
+    <button id="saveMetrics"
+      style="width:100%;padding:12px;border:0;border-radius:13px;background:#0a84ff;color:white;font-weight:700">
+      Save Check-in
+    </button>
+
+    <div id="metricHistory" style="margin-top:15px"></div>
+  </div>
+
+  <div class="card">
+    <h2>Photo protocol</h2>
+    <ol class="small">
+      <li>Take front, side and back photos every 4 weeks.</li>
+      <li>Use similar lighting, distance, posture and time of day.</li>
+      <li>Don't flex one week and relax the next.</li>
+      <li>Compare month-to-month, not day-to-day.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>When to adjust calories</h2>
+    <p class="small">
+      If your weekly average weight is falling quickly and gym performance is
+      suffering, increase food modestly. If weight and waist are both rising
+      consistently, reduce portions modestly. If strength is improving and
+      waist is stable or slowly decreasing, leave the plan alone.
+    </p>
+  </div>
+
+  <div class="card">
+    <button class="reset" id="resetAll">Reset dashboard data</button>
+  </div>
+</section>
+
+<footer>
+  LookMax & Training Hub • Built for consistent execution
+</footer>
+
+</div>
+
+<!-- ===================== BOTTOM NAV ===================== -->
+<nav class="nav">
+  <button class="active" data-section="workout">
+    <span class="nav-icon">🏋️</span>Workout
+  </button>
+  <button data-section="meals">
+    <span class="nav-icon">🍳</span>Meals
+  </button>
+  <button data-section="lookmax">
+    <span class="nav-icon">✨</span>LookMax
+  </button>
+  <button data-section="progress">
+    <span class="nav-icon">📈</span>Progress
+  </button>
+</nav>
+
+<script>
+/* =========================================================
+   LOOKMAX & TRAINING HUB
+   All data is stored locally in the browser.
+========================================================= */
+
+const workoutData = {
+  Mon:{
+    name:"Monday",
+    title:"Push — Upper Chest + Shoulders + Triceps",
+    focus:"Upper chest • side delts • triceps",
+    exercises:[
+      ["Smith/Barbell Bench Press","Chest","3","6–10","90 sec","Feet planted. Keep shoulder blades controlled and lower the bar toward mid/lower chest. Don't bounce."],
+      ["Incline Dumbbell Press","Upper chest","3","8–12","75–90 sec","Use a moderate incline. Keep elbows slightly tucked and lower under control. Think upper-chest press, not shoulder press."],
+      ["Seated Dumbbell Shoulder Press","Front/side delts","3","8–12","90 sec","Brace your core. Press smoothly without excessive lower-back arching."],
+      ["Cable Lateral Raise","Side delts","4","12–20","45–60 sec","Use light weight. Lead with the elbow, keep traps relaxed and stop around shoulder height."],
+      ["Cable Chest Fly","Chest","2","12–15","60 sec","Soft elbows. Bring the hands together in a controlled arc and squeeze the chest."],
+      ["Rope Triceps Pushdown","Triceps","3","10–15","60 sec","Keep elbows near your ribs. Fully extend without swinging your torso."],
+      ["Overhead Cable Triceps Extension","Triceps","2","10–15","60 sec","Keep upper arms relatively fixed and allow a comfortable stretch before extending."]
+    ]
+  },
+  Tue:{
+    name:"Tuesday",
+    title:"Pull — Back Width + Rear Delts + Biceps",
+    focus:"Lats • upper back • rear delts • arms",
+    exercises:[
+      ["Pull-ups","Lats/upper back","3","Clean reps","90 sec","Start from a controlled hang. Pull elbows toward your sides. Use assisted/negative reps if needed."],
+      ["Cable Lat Pulldown","Lats","3","8–12","75–90 sec","Pull toward upper chest. Keep shoulders down and think elbows toward hips."],
+      ["Seated Cable Row","Mid-back/lats","3","8–12","75 sec","Stay tall. Pull toward lower ribs and avoid excessive torso rocking."],
+      ["One-Arm Dumbbell Row","Lats/upper back","2","8–12/side","60–75 sec","Brace on the bench. Drive the elbow toward your hip and lower slowly."],
+      ["Cable Rear-Delt Fly","Rear delts","3","15–20","45–60 sec","Use light resistance. Move from the shoulder rather than shrugging."],
+      ["Face Pull","Rear delts/posture","2","15–20","45 sec","Pull toward eye/forehead level with elbows comfortably high. Don't turn it into a heavy row."],
+      ["Dumbbell Curl","Biceps","3","8–12","60 sec","Keep elbows stable. Lower under control and avoid swinging."],
+      ["Rope Hammer Curl","Brachialis/biceps","2","10–15","45–60 sec","Neutral grip throughout. Keep the upper arm mostly stationary."]
+    ]
+  },
+  Wed:{
+    name:"Wednesday",
+    title:"Active Recovery",
+    focus:"Recovery • movement • posture",
+    exercises:[
+      ["Treadmill Walk","Cardio/recovery","1","20–30 min","—","Comfortable/moderate pace. You should be able to speak in short sentences."],
+      ["OR Cycling","Cardio/recovery","1","20–30 min","—","Moderate effort. This is recovery, not a hard conditioning workout."],
+      ["Posture Reset","Posture","2","2 min","30 sec","Chin gently tucked, ribs stacked over pelvis, shoulders relaxed. No aggressive stretching."],
+      ["Light Mobility","Mobility","1","5–10 min","—","Use comfortable ranges for hips, shoulders and upper back."]
+    ]
+  },
+  Thu:{
+    name:"Thursday",
+    title:"Legs + Core",
+    focus:"Quads • hamstrings • glutes • core",
+    exercises:[
+      ["Smith Machine Squat","Quads/glutes","3","6–10","90 sec","Brace before descending. Keep feet stable and knees tracking with toes. Use a depth you can control."],
+      ["Romanian Deadlift","Hamstrings/glutes","3","8–12","90 sec","Push hips back. Keep the spine neutral and stop when hamstrings limit the range."],
+      ["Bulgarian Split Squat","Quads/glutes","3","8–12/leg","75 sec","Use the bench for rear-foot support. Control the descent and keep the front foot planted."],
+      ["Cable Leg Curl","Hamstrings","3","10–15","60 sec","Use an ankle attachment if available. Curl without swinging your hips."],
+      ["Standing Calf Raise","Calves","4","12–20","45–60 sec","Full comfortable range. Pause briefly at the top and lower slowly."],
+      ["Hanging Knee Raise","Abs/hip flexors","3","10–15","45 sec","Avoid swinging. Curl the pelvis upward rather than simply lifting the knees."],
+      ["Plank","Core","2","45–60 sec","30–45 sec","Squeeze glutes and abs. Keep ribs down and hips level."]
+    ]
+  },
+  Fri:{
+    name:"Friday",
+    title:"Rest",
+    focus:"Recovery",
+    exercises:[
+      ["Easy Walking","General recovery","1","Optional 20–30 min","—","Easy movement only. No hard conditioning needed."]
+    ]
+  },
+  Sat:{
+    name:"Saturday",
+    title:"Upper — Aesthetic Specialization",
+    focus:"Lats • upper chest • side/rear delts • arms",
+    exercises:[
+      ["Incline Dumbbell Press","Upper chest","3","8–12","75–90 sec","Controlled stretch and strong press. Keep shoulder position stable."],
+      ["Lat Pulldown / Pull-up","Lats","3","8–12","75–90 sec","Drive elbows down toward the sides. Avoid excessive swinging."],
+      ["Seated Cable Row","Upper back","3","8–12","75 sec","Pull to lower ribs with a controlled return."],
+      ["Cable Lateral Raise","Side delts","4","12–20","45–60 sec","Light weight and strict motion. Don't shrug."],
+      ["Cable Rear-Delt Fly","Rear delts","3","15–20","45–60 sec","Controlled reps; prioritize tension over load."],
+      ["Cable Chest Fly","Chest","2","12–15","60 sec","Smooth arc and controlled squeeze."],
+      ["Hammer Curl","Biceps/brachialis","2","10–15","45–60 sec","Neutral grip; no swinging."],
+      ["Rope Triceps Pushdown","Triceps","2","10–15","45–60 sec","Elbows stay close and extension is controlled."]
+    ]
+  },
+  Sun:{
+    name:"Sunday",
+    title:"Rest + Meal Prep",
+    focus:"Recovery • preparation",
+    exercises:[
+      ["Meal Prep","Nutrition","1","60–90 min","—","Prepare rajma, dal, eggs, rice portions and chicken servings for the week."],
+      ["Easy Walk","Recovery","1","Optional 20–30 min","—","Relaxed pace if desired."]
+    ]
+  }
+};
+
+const mealData = {
+  Mon:{
+    title:"Push Day",
+    meals:[
+      ["Pre-workout • 7:45–8:15","Banana + 250 ml milk","~250 kcal","Light carbohydrate + protein before 9 AM training."],
+      ["Post-workout • 10:30","60 g dry oats + 300 ml milk + 2 whole eggs + 2 egg whites + ½–1 banana","~500–550 kcal","Main recovery meal."],
+      ["Lunch • 1:00","180–200 g raw chicken + 150–200 g cooked rice + 150–250 g vegetables + 150 g curd","~550–650 kcal","Chicken is weighed raw; rice is weighed cooked."],
+      ["Dinner • 7:00","200 g cooked rajma + 150–180 g cooked rice + vegetables + 150 g curd","~500–600 kcal","Budget-friendly plant protein meal."],
+      ["Optional","15–20 g mixed nuts","~90–120 kcal","Measure rather than eating from the bag."]
+    ]
+  },
+  Tue:{
+    title:"Pull Day",
+    meals:[
+      ["Pre-workout","Banana + 250 ml milk","~250 kcal","Simple pre-training meal."],
+      ["Post-workout","60 g oats + 300 ml milk + 2 eggs + 2 egg whites + banana","~500–550 kcal","Protein-rich breakfast."],
+      ["Lunch","180–200 g raw chicken + 2 chapatis + vegetables + 150–200 g curd","~550–650 kcal","Use onion/tomato/lettuce for volume."],
+      ["Dinner","3-egg curry/bhurji + 2 chapatis + vegetables + 150 g curd","~450–550 kcal","Add egg whites if more protein is needed."],
+      ["Optional","15–20 g mixed nuts","~90–120 kcal","Keep portion controlled."]
+    ]
+  },
+  Wed:{
+    title:"Active Recovery",
+    meals:[
+      ["Breakfast","60 g oats + 300 ml milk + 3 eggs + banana","~500–600 kcal","No need for a pre-workout meal on recovery day."],
+      ["Lunch","180–200 g raw chicken + 150–200 g cooked rice + vegetables","~500–600 kcal","Main protein meal."],
+      ["Snack/side","150–200 g curd + fruit if desired","~100–180 kcal","Keep it simple."],
+      ["Dinner","250 g cooked dal/pappu + 2 eggs + 2 chapatis + vegetables","~500–600 kcal","Rotate protein sources."]
+    ]
+  },
+  Thu:{
+    title:"Legs + Core",
+    meals:[
+      ["Pre-workout","Banana + 250 ml milk","~250 kcal","Useful before the higher-demand leg session."],
+      ["Post-workout","60 g oats + 300 ml milk + 2 eggs + 2 egg whites + banana","~500–550 kcal","Carbohydrate + protein recovery."],
+      ["Lunch","180–200 g raw chicken + 150–200 g cooked rice + vegetables + curd","~550–650 kcal","Don't unnecessarily restrict carbohydrates on leg day."],
+      ["Dinner","150–180 g raw chicken + 2 chapatis + vegetables + curd","~500–600 kcal","Last chicken serving of the week can be here if preferred."]
+    ]
+  },
+  Fri:{
+    title:"Rest Day",
+    meals:[
+      ["Breakfast","60 g oats + 300 ml milk + 3 eggs + banana","~500–600 kcal","Protein remains high on rest days."],
+      ["Lunch","200 g cooked rajma + 150–180 g cooked rice + vegetables + curd","~500–600 kcal","Budget-friendly."],
+      ["Dinner","3-egg curry/bhurji + 2 chapatis + vegetables","~450–550 kcal","Use egg whites if needed to reach protein."],
+      ["Optional","15–20 g nuts","~90–120 kcal","Portion-controlled."]
+    ]
+  },
+ Sat:{
+    title:"Upper Body",
+    meals:[
+      ["Pre-workout","Banana + 250 ml milk","~250 kcal","Simple fuel."],
+      ["Post-workout","60 g oats + 300 ml milk + 2 eggs + 2 egg whites + banana","~500–550 kcal","Recovery meal."],
+      ["Lunch","180–200 g raw chicken + 150–200 g cooked rice + vegetables + curd","~550–650 kcal","Main chicken serving."],
+      ["Dinner","100 g paneer + 2 chapatis + vegetables + 150 g curd","~500–600 kcal","Paneer kept occasional for budget control."]
+    ]
+  },
+ Sun:{
+    title:"Rest + Meal Prep",
+    meals:[
+      ["Breakfast","60 g oats + 300 ml milk + 3 eggs + banana","~500–600 kcal","Simple breakfast."],
+      ["Lunch","250 g cooked dal + 2 eggs + 150–180 g cooked rice + vegetables","~500–600 kcal","Cook during meal prep."],
+      ["Dinner","3-egg curry + 2 chapatis + vegetables + curd","~450–550 kcal","Finish the week simply."],
+      ["Optional","15–20 g mixed nuts","~90–120 kcal","Measure portion."]
+    ]
+  }
+};
+
+/* ---------- local storage helpers ---------- */
+const getJSON=(key, fallback={})=>{
+  try{return JSON.parse(localStorage.getItem(key))||fallback}catch(e){return fallback}
+};
+const setJSON=(key,val)=>localStorage.setItem(key,JSON.stringify(val));
+
+let currentDay = "Mon";
+let workoutChecks = getJSON("workoutChecks",{});
+let mealChecks = getJSON("mealChecks",{});
+let habitChecks = getJSON("habitChecks",{});
+let waterState = getJSON("waterState",{});
+let metrics = getJSON("metrics",[]);
+
+/* ---------- navigation ---------- */
+document.querySelectorAll(".nav button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(btn.dataset.section).classList.add("active");
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+});
+
+/* ---------- day bars ---------- */
+const dayKeys=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+const shortDays={Mon:"MON",Tue:"TUE",Wed:"WED",Thu:"THU",Fri:"FRI",Sat:"SAT",Sun:"SUN"};
+
+function buildDayBar(containerId, handler){
+  const bar=document.getElementById(containerId);
+  bar.innerHTML="";
+  dayKeys.forEach(k=>{
+    const b=document.createElement("button");
+    b.className="day"+(k===currentDay?" active":"");
+    b.innerHTML=`<strong>${shortDays[k]}</strong><small>${k===currentDay?"NOW":" "}</small>`;
+    b.addEventListener("click",()=>handler(k));
+    bar.appendChild(b);
+  });
+}
+function selectWorkoutDay(k){
+  currentDay=k;
+  buildDayBar("dayBar",selectWorkoutDay);
+  buildDayBar("mealDayBar",selectMealDay);
+  renderWorkout();
+  renderMeals();
+}
+function selectMealDay(k){
+  currentDay=k;
+  buildDayBar("mealDayBar",selectMealDay);
+  buildDayBar("dayBar",selectWorkoutDay);
+  renderMeals();
+  renderWorkout();
+}
+
+/* ---------- workouts ---------- */
+function renderWorkout(){
+  const d=workoutData[currentDay];
+  document.getElementById("workoutLabel").textContent=d.name;
+  document.getElementById("workoutTitle").textContent=d.title;
+
+  const list=document.getElementById("exerciseList");
+  list.innerHTML="";
+
+  let done=0;
+  d.exercises.forEach((ex,i)=>{
+    const key=`${currentDay}-${i}`;
+    const checked=!!workoutChecks[key];
+    if(checked)done++;
+
+    const el=document.createElement("div");
+    el.className="card exercise";
+    el.innerHTML=`
+      <div class="exercise-top">
+        <input class="check workout-check" type="checkbox" ${checked?"checked":""} data-key="${key}">
+        <div style="flex:1">
+          <h3>${i+1}. ${ex[0]}</h3>
+          <div class="tags">
+            <span class="tag blue">${ex[1]}</span>
+            <span class="tag">${ex[2]} sets</span>
+            <span class="tag green">${ex[3]} reps</span>
+            <span class="tag">${ex[4]} rest</span>
+          </div>
+          <div class="tip"><b>Form:</b> ${ex[5]}</div>
+        </div>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+
+  const pct=d.exercises.length?Math.round(done/d.exercises.length*100):0;
+  document.getElementById("workoutPercent").textContent=pct+"%";
+  document.getElementById("workoutProgress").style.width=pct+"%";
+
+  document.querySelectorAll(".workout-check").forEach(cb=>{
+    cb.addEventListener("change",()=>{
+      workoutChecks[cb.dataset.key]=cb.checked;
+      setJSON("workoutChecks",workoutChecks);
+      renderWorkout();
+    });
+  });
+}
+
+/* ---------- meals ---------- */
+function renderMeals(){
+  const d=mealData[currentDay];
+  document.getElementById("mealDayLabel").textContent=workoutData[currentDay].name;
+  document.getElementById("mealDayTitle").textContent=d.title;
+
+  const list=document.getElementById("mealList");
+  list.innerHTML="";
+  d.meals.forEach((m,i)=>{
+    const key=`${currentDay}-${i}`;
+    const el=document.createElement("div");
+    el.className="meal";
+    el.innerHTML=`
+      <div class="meal-title">
+        <strong>${m[0]}</strong>
+        <span class="kcal">${m[2]}</span>
+      </div>
+      <div class="food">${m[1]}</div>
+      <div class="note">${m[3]}</div>
+    `;
+    list.appendChild(el);
+  });
+
+  renderMealChecklist();
+}
+
+function renderMealChecklist(){
+  const container=document.getElementById("mealChecklist");
+  const d=mealData[currentDay];
+  container.innerHTML="";
+  d.meals.forEach((m,i)=>{
+    const key=`${currentDay}-${i}`;
+    const el=document.createElement("div");
+    el.className="checkrow";
+    el.innerHTML=`
+      <input class="check meal-check" type="checkbox" ${mealChecks[key]?"checked":""} data-key="${key}">
+      <div><b>${m[0]}</b><div class="small muted">${m[1]}</div></div>
+    `;
+    container.appendChild(el);
+  });
+  document.querySelectorAll(".meal-check").forEach(cb=>{
+    cb.addEventListener("change",()=>{
+      mealChecks[cb.dataset.key]=cb.checked;
+      setJSON("mealChecks",mealChecks);
+    });
+  });
+}
+
+/* ---------- hydration ---------- */
+function renderWater(){
+  const today=new Date().toISOString().slice(0,10);
+  const count=waterState[today]||0;
+  document.getElementById("waterCount").textContent=count;
+  const box=document.getElementById("waterButtons");
+  box.innerHTML="";
+  for(let i=1;i<=8;i++){
+    const b=document.createElement("button");
+    b.textContent=i<=count?"✓":"○";
+    if(i<=count)b.classList.add("done");
+    b.addEventListener("click",()=>{
+      waterState[today]=i===count?i-1:i;
+      setJSON("waterState",waterState);
+      renderWater();
+    });
+    box.appendChild(b);
+  }
+}
+
+/* ---------- habits ---------- */
+function loadHabits(){
+  document.querySelectorAll(".habit").forEach(cb=>{
+    cb.checked=!!habitChecks[cb.dataset.key];
+    cb.addEventListener("change",()=>{
+      habitChecks[cb.dataset.key]=cb.checked;
+      setJSON("habitChecks",habitChecks);
+    });
+  });
+}
+
+/* ---------- metrics ---------- */
+function renderMetrics(){
+  const box=document.getElementById("metricHistory");
+  if(!metrics.length){
+    box.innerHTML='<p class="small muted">No check-ins yet.</p>';
+    return;
+  }
+  box.innerHTML=metrics.slice().reverse().map(m=>`
+    <div class="stat" style="margin-top:8px">
+      <strong>${m.weight ? m.weight+" kg" : "—"} ${m.waist ? "• "+m.waist+" cm waist":""}</strong>
+      <span>${m.date}</span>
+    </div>
+  `).join("");
+}
+
+document.getElementById("saveMetrics").addEventListener("click",()=>{
+  const weight=document.getElementById("weightInput").value;
+  const waist=document.getElementById("waistInput").value;
+  if(!weight && !waist)return;
+  metrics.push({
+    date:new Date().toLocaleDateString(),
+    weight:weight?Number(weight):null,
+    waist:waist?Number(waist):null
+  });
+  setJSON("metrics",metrics);
+  document.getElementById("weightInput").value="";
+  document.getElementById("waistInput").value="";
+  renderMetrics();
+});
+
+/* ---------- reset ---------- */
+document.getElementById("resetAll").addEventListener("click",()=>{
+  if(!confirm("Reset all workout, meal, habit, hydration and progress data?"))return;
+  localStorage.clear();
+  location.reload();
+});
+
+/* ---------- initial render ---------- */
+buildDayBar("dayBar",selectWorkoutDay);
+buildDayBar("mealDayBar",selectMealDay);
+renderWorkout();
+renderMeals();
+renderWater();
+loadHabits();
+renderMetrics();
+</script>
+
+</body>
+</html>
