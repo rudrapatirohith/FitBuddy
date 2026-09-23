@@ -1,23 +1,636 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090a0f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>LookMax & Training Hub</title><style>
-:root{--bg:#090a0f;--card:#151720;--line:#292d39;--text:#f5f6fa;--muted:#9da3b2;--accent:#8b5cf6;--green:#34d399;--blue:#60a5fa;--yellow:#f59e0b;--radius:20px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif;padding-bottom:90px}.app{max-width:900px;margin:auto;padding:18px 14px 100px}header{padding:6px 2px 18px}.eyebrow{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:.09em;text-transform:uppercase}h1{font-size:29px;margin:5px 0}.sub,.note{color:var(--muted);font-size:13px;line-height:1.45}.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:linear-gradient(180deg,var(--card),#11131a);border:1px solid var(--line);border-radius:var(--radius);padding:15px;margin-bottom:12px;box-shadow:0 8px 30px #0005}.card h2{font-size:18px;margin:0 0 9px}.card h3{font-size:15px;margin:14px 0 5px}.stat{font-size:25px;font-weight:800}.label{font-size:11px;color:var(--muted)}.pill{display:inline-block;border:1px solid var(--line);background:#fff1;color:#d9dce5;border-radius:999px;padding:5px 9px;font-size:10px;margin:3px 3px 0 0}.pill.primary{border-color:#8b5cf655;color:#c4b5fd;background:#8b5cf612}.pill.secondary{border-color:#60a5fa44;color:#a9c9ff}.pill.core{border-color:#34d39944;color:#86efac}.pill.priority{border-color:#f59e0b55;color:#fbbf24}.section-title{display:flex;justify-content:space-between;align-items:center;margin:18px 2px 9px}.section-title h2{font-size:18px;margin:0}.smallbtn{border:1px solid var(--line);background:var(--card);color:#fff;border-radius:10px;padding:7px 10px;font-size:12px}.daytabs{display:flex;gap:7px;overflow:auto;padding:2px 0 12px;scrollbar-width:none}.daytabs button{background:var(--card);border:1px solid var(--line);color:var(--muted);border-radius:13px;padding:9px 13px}.daytabs button.active{background:#8b5cf620;border-color:#8b5cf677;color:#fff}.exercise{border:1px solid var(--line);border-radius:17px;padding:13px;margin:9px 0;background:#ffffff03}.ex-top{display:flex;gap:10px;align-items:flex-start}.check{width:22px;height:22px;accent-color:var(--accent);flex:0 0 auto}.ex-name{font-weight:750;font-size:15px}.sets{font-size:13px;color:#c7cad3;margin-top:3px}.tags{margin-top:5px}.tip{border-left:3px solid var(--accent);padding-left:11px;color:#d7d9e1;font-size:13px;line-height:1.5}.progressbar{height:8px;background:#262a34;border-radius:99px;overflow:hidden}.progressbar i{display:block;height:100%;background:var(--accent);width:0}.metric{display:flex;justify-content:space-between;font-size:13px;margin:7px 0}.metric span:last-child{font-weight:700}.nav{position:fixed;z-index:10;left:50%;bottom:8px;transform:translateX(-50%);width:min(95%,690px);background:#151720ee;border:1px solid #303441;backdrop-filter:blur(18px);border-radius:22px;padding:8px;display:grid;grid-template-columns:repeat(6,1fr);box-shadow:0 12px 40px #0008}.nav button{background:none;border:0;color:#858b99;font-size:10px;padding:6px 2px;border-radius:14px}.nav button.active{color:#fff;background:#ffffff0c}.nav b{display:block;font-size:16px;margin-bottom:2px}ul{padding-left:19px;color:#c9ccd5;font-size:13px;line-height:1.55}li{margin:4px 0}.svgbox{display:flex;justify-content:center;align-items:center;min-height:190px;background:#0d0f15;border:1px solid var(--line);border-radius:18px}.muscle{fill:#383d49;stroke:#697080;stroke-width:1}.hot{fill:#8b5cf6;stroke:#c4b5fd}.bodylabel{font-size:11px;fill:#cdd1db}.checkrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}.checkrow input{width:20px;height:20px;accent-color:var(--accent)}.meal{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.meal:last-child{border:0}.meal strong{font-size:14px}.meal span{font-size:12px;color:var(--muted);text-align:right}textarea,input[type=number]{width:100%;background:#0e1016;color:#fff;border:1px solid var(--line);border-radius:10px;padding:9px}textarea{min-height:90px;resize:vertical}@media(max-width:600px){h1{font-size:27px}.grid{gap:9px}.card{padding:14px}.nav{bottom:6px}}
-</style></head><body><div class="app"><header><div class="eyebrow">Personal transformation system</div><h1>LookMax & Training Hub</h1><div class="sub">Lean athletic physique • V-taper • upper chest • shoulders • back • arms • core • grooming</div></header>
-<section id="dashboard" class="page active"><div class="grid"><div class="card"><div class="label">Current weight</div><div class="stat">~72 kg</div><div class="label">Track weekly average</div></div><div class="card"><div class="label">Height</div><div class="stat">5'8"</div><div class="label">Goal: recomposition</div></div></div><div class="card"><h2>Today's focus</h2><div id="todayFocus" class="tip"></div></div><div class="card"><h2>Transformation priorities</h2><span class="pill priority">Lateral delts</span><span class="pill priority">Lats / V-taper</span><span class="pill priority">Upper chest</span><span class="pill">Rear delts</span><span class="pill">Arms</span><span class="pill">Abs</span><span class="pill">Legs</span></div><div class="card"><h2>Weekly completion</h2><div class="metric"><span>Workout checkboxes</span><span id="weekPct">0%</span></div><div class="progressbar"><i id="weekBar"></i></div></div><div class="card"><h2>Training rules</h2><ul><li>Most working sets: finish with about 1–3 reps in reserve.</li><li>Double progression: reach the top of the rep range on all sets, then add a small amount of weight.</li><li>Use controlled reps and a full comfortable range of motion.</li><li>Do not add random exercises just to make the workout longer.</li><li>Optional cardio: 15–25 min easy incline walking or 20–30 min cycling.</li></ul></div></section>
-<section id="workout" class="page"><div class="section-title"><h2>Final weekly gym plan</h2><button class="smallbtn" onclick="resetWorkout()">Reset checks</button></div><div class="daytabs" id="dayTabs"></div><div id="workoutContent"></div><div class="card"><h2>Equipment</h2><div class="sub">Dumbbells • Smith/barbell • adjustable bench • cable functional trainer • pull-up bar • treadmill/cycle</div></div></section>
-<section id="muscles" class="page"><div class="card"><h2>Lookmax muscle map</h2><div class="sub">Priority areas are highlighted. This is a training reference, not an anatomical diagnostic.</div><div class="svgbox"><svg viewBox="0 0 300 250" width="100%" height="250"><circle cx="150" cy="38" r="22" class="muscle"/><path d="M128 62Q150 53 172 62L190 83 177 112 164 80 150 88 136 80 123 112 110 83Z" class="muscle"/><path d="M136 80 116 70 91 83 102 98 127 91Z" class="hot"/><path d="M164 80 184 70 209 83 198 98 173 91Z" class="hot"/><path d="M127 86 150 88 173 86 166 119 150 126 134 119Z" class="hot"/><path d="M134 119 150 126 166 119 169 166 151 181 131 166Z" class="hot"/><path d="M131 166 151 181 145 231 123 231 117 193Z" class="muscle"/><path d="M169 166 149 181 155 231 177 231 183 193Z" class="muscle"/><text x="12" y="245" class="bodylabel">Chest • delts • core • quads</text></svg></div><div style="margin-top:8px"><span class="pill priority">Lateral delts</span><span class="pill priority">Upper chest</span><span class="pill priority">Lats</span><span class="pill">Rear delts</span><span class="pill core">Core</span></div></div><div class="card"><h2>Back coverage</h2><ul><li><b>Lat width:</b> pull-ups + pulldown + straight-arm pulldown.</li><li><b>Back thickness:</b> seated cable row + one-arm DB row.</li><li><b>Rear shoulders:</b> rear-delt fly.</li><li>Both vertical and horizontal pulling are included.</li></ul></div></section>
-<section id="nutrition" class="page"><div class="card"><h2>Recomposition nutrition</h2><div class="metric"><span>Protein</span><span>~115–130 g/day</span></div><div class="metric"><span>Strategy</span><span>Maintenance / small deficit</span></div><div class="metric"><span>Priority</span><span>Protein + whole foods + consistency</span></div><div class="tip">You do not need a dirty bulk. Keep body weight roughly stable initially and use waist, photos, strength and weekly averages to adjust.</div></div><div class="card"><h2>Bachelor-friendly template</h2><div class="meal"><div><strong>Pre-gym</strong><br><span>Banana + water</span></div><span>Optional oats/milk if hungry</span></div><div class="meal"><div><strong>Post-gym</strong><br><span>Oats + milk + eggs</span></div><span>Whey if needed for protein</span></div><div class="meal"><div><strong>Lunch</strong><br><span>Chicken + oats/rice/chapati + vegetable + curd</span></div><span>Protein-centered</span></div><div class="meal"><div><strong>Dinner</strong><br><span>Chicken/paneer/rajma/meal maker + chapati + vegetable</span></div><span>Rotate proteins</span></div></div><div class="card"><h2>Foods you can rotate</h2><div class="sub">Chicken • eggs • whey • paneer • rajma • toor dal • meal maker/soya • milk • curd • oats • banana • sweet potato • potato • okra • dondakay/ivy gourd • beerakaya/ridge gourd • onion • tomato • green chilli • other vegetables/fruit</div></div><div class="card"><h2>Simple chicken cooking</h2><h3>Air fryer</h3><div class="sub">Cut evenly, season, use a little oil, air-fry around 375–400°F and verify the thickest piece reaches 165°F. Time varies by piece size and appliance.</div><h3>Pressure-cooker curry</h3><div class="sub">Sauté onion + tomato + spices, add chicken and a little water, pressure-cook according to the cooker/manual, then verify 165°F internally. Cool promptly and refrigerate in shallow containers.</div></div></section>
-<section id="skin" class="page"><div class="card"><h2>AM skincare</h2><div class="checkrow"><input type="checkbox" class="habit" data-key="amClean">Cleanser</div><div class="checkrow"><input type="checkbox" class="habit" data-key="amVitC">Vitamin C 10% if tolerated</div><div class="checkrow"><input type="checkbox" class="habit" data-key="amMoist">Moisturizer as needed</div><div class="checkrow"><input type="checkbox" class="habit" data-key="amSpf">Broad-spectrum SPF 30+ daily</div></div><div class="card"><h2>PM skincare</h2><div class="checkrow"><input type="checkbox" class="habit" data-key="pmClean">Cleanser</div><div class="checkrow"><input type="checkbox" class="habit" data-key="pmNiac">Niacinamide if tolerated</div><div class="checkrow"><input type="checkbox" class="habit" data-key="pmMoist">Moisturizer</div></div><div class="card"><h2>Skin rules</h2><ul><li>Introduce one new active at a time.</li><li>If an active causes persistent burning/redness, stop and simplify.</li><li>Sun protection is the key daily step for tanning/PIH management.</li><li>Recurring itchy bumps should be assessed by a clinician/dermatologist rather than assumed to be “body heat.”</li></ul></div></section>
-<section id="habits" class="page"><div class="card"><h2>Daily checklist</h2><div class="checkrow"><input type="checkbox" class="habit" data-key="protein">Protein target</div><div class="checkrow"><input type="checkbox" class="habit" data-key="water">Adequate fluids</div><div class="checkrow"><input type="checkbox" class="habit" data-key="steps">Daily movement / walk</div><div class="checkrow"><input type="checkbox" class="habit" data-key="posture">5-min posture routine</div><div class="checkrow"><input type="checkbox" class="habit" data-key="sleep">7–9 h sleep opportunity</div><div class="checkrow"><input type="checkbox" class="habit" data-key="mealprep">Controlled meals / prep</div></div><div class="card"><h2>5-minute posture routine</h2><ul><li>Chin tucks — 2 × 10</li><li>Door-frame chest stretch — 30 sec/side</li><li>Gentle thoracic mobility</li><li>Stand and move every ~45–60 min during desk work</li></ul></div></section>
-<section id="progress" class="page"><div class="card"><h2>Progress log</h2><div class="sub">Use trends, not single-day fluctuations.</div><div class="checkrow"><label style="width:100%">Weekly average weight (kg)<input id="weightInput" type="number" step="0.1" placeholder="72.0" style="margin-top:6px"></label></div><div class="checkrow"><label style="width:100%">Waist (cm)<input id="waistInput" type="number" step="0.1" placeholder="measure weekly" style="margin-top:6px"></label></div><button class="smallbtn" onclick="saveProgress()">Save</button></div><div class="card"><h2>Track</h2><ul><li>Weekly average weight</li><li>Waist measurement</li><li>Bench, row, pulldown, squat and RDL performance</li><li>Front/side/back photos every 3–4 weeks in similar lighting</li><li>Shoulder/waist clothing fit</li></ul></div><div class="card"><h2>Long-term principle</h2><div class="tip">Muscle and strength require continued resistance training to maintain fully. A long break can reduce them, but returning to training is generally easier than starting from zero. No supplement permanently preserves training adaptations.</div></div><div class="card"><textarea id="notes" placeholder="Weekly notes..."></textarea><button class="smallbtn" style="margin-top:8px" onclick="saveNotes()">Save notes</button></div></section>
-<nav class="nav"><button data-page="dashboard" class="active"><b>⌂</b>Home</button><button data-page="workout"><b>🏋</b>Workout</button><button data-page="muscles"><b>◉</b>Map</button><button data-page="nutrition"><b>🍽</b>Food</button><button data-page="skin"><b>✦</b>Skin</button><button data-page="habits"><b>✓</b>Habits</button></nav></div>
-<script>
-const plans={Mon:{title:"MONDAY — PUSH",subtitle:"Chest + Shoulders + Triceps",ex:[["Smith/Barbell Flat Bench Press","3 × 6–10","Chest","Front delts • Triceps","Primary flat press."],["Incline Dumbbell Press","3 × 8–12","Upper chest","Front delts • Triceps","High-priority upper chest."],["Seated DB Shoulder Press","2 × 8–12","Front delts","Triceps","Controlled reps."],["Cable Lateral Raise","4 × 12–20","Lateral delts","—","HIGH PRIORITY for shoulder width."],["Cable/Dumbbell Chest Fly","2 × 12–15","Chest","—","Controlled stretch."],["Rope Triceps Pushdown","3 × 10–15","Triceps","—","Full elbow extension."],["Cable Overhead Triceps Extension","2 × 10–15","Triceps long head","—","Pain-free range."]]},Tue:{title:"TUESDAY — PULL",subtitle:"Lats + Back Thickness + Rear Delts + Biceps",ex:[["Pull-Ups","3 × 6–10","Lats","Biceps • Upper back","Use controlled negatives if needed."],["Cable Lat Pulldown","3 × 8–12","Lats","Biceps","Pull toward upper chest."],["Seated Cable Row","3 × 8–12","Mid-back","Lats • Rear delts","Avoid shrugging."],["One-Arm Dumbbell Row","2 × 10–12 / side","Lats + mid-back","Biceps","Unilateral work."],["Straight-Arm Cable Pulldown","2 × 12–15","Lats","Core","Focus on lat contraction."],["Cable Rear-Delt Fly","3 × 15–20","Rear delts","Upper back","Light and controlled."],["DB/Cable Curl","2 × 10–12","Biceps","Forearms","No swinging."],["Hammer Curl","2 × 10–12","Brachialis + biceps","Forearms","Neutral grip."]]},Thu:{title:"THURSDAY — LEGS + ABS",subtitle:"Quads + Hamstrings + Glutes + Complete Core",ex:[["Smith Squat","3 × 6–10","Quads","Glutes • Core","Safe controlled depth."],["DB/Smith Romanian Deadlift","3 × 8–12","Hamstrings","Glutes • Spinal erectors","Hip hinge; neutral spine."],["Bulgarian Split Squat","2 × 8–12 / leg","Quads + glutes","Core","Use DBs if appropriate."],["Cable Leg Curl","2 × 10–15","Hamstrings","—","Use ankle attachment if available."],["Standing Calf Raise","3 × 12–20","Calves","—","Pause at stretch."],["Hanging Knee/Leg Raise","3 × 10–15","Abs","Hip flexors","Progress toward straighter legs."],["Cable Crunch","3 × 10–15","Abs","—","Curl torso, don't pull with arms."],["Pallof Press","2 × 10–15 / side","Core","Obliques","Anti-rotation."]]},Sat:{title:"SATURDAY — UPPER LOOKMAX",subtitle:"Chest + Back + Delts + Arms + Abs",ex:[["Incline Dumbbell Press","3 × 8–12","Upper chest","Front delts • Triceps","Second upper-chest stimulus."],["Pull-Ups / Lat Pulldown","3 × 8–12","Lats","Biceps","Choose quality version."],["Seated Cable Row","2 × 10–12","Mid-back","Lats • Rear delts","Second row exposure."],["Cable Lateral Raise","3 × 12–20","Lateral delts","—","HIGH PRIORITY for width."],["Rear-Delt Cable Fly","2 × 15–20","Rear delts","Upper back","Continuous tension."],["Cable Chest Fly","2 × 12–15","Chest","—","Moderate load."],["Hammer Curl","2 × 10–12","Brachialis + biceps","Forearms","Controlled."],["Rope Triceps Pushdown","2 × 10–15","Triceps","—","Controlled lockout."],["Cable Crunch","3 × 10–15","Abs","—","Direct weighted ab work."]]}};
-let activeDay="Mon";function stateKey(){return"lmhub_"+new Date().toISOString().slice(0,10)}function getState(){try{return JSON.parse(localStorage.getItem(stateKey())||"{}")}catch(e){return{}}}function setState(s){localStorage.setItem(stateKey(),JSON.stringify(s))}
-function renderTabs(){let e=document.getElementById("dayTabs");e.innerHTML="";Object.entries(plans).forEach(([d,p])=>{let b=document.createElement("button");b.textContent=d;b.className=d===activeDay?"active":"";b.onclick=()=>{activeDay=d;renderTabs();renderWorkout()};e.appendChild(b)})}
-function renderWorkout(){let p=plans[activeDay],s=getState(),c=document.getElementById("workoutContent"),h='<div class="card"><h2>'+p.title+'</h2><div class="sub">'+p.subtitle+'</div><div class="tip" style="margin-top:9px">Warm-up: 5–7 min treadmill/cycle + light warm-up sets before the first compound.</div></div>';p.ex.forEach((e,i)=>{let id=activeDay+"_"+i;h+='<div class="exercise"><div class="ex-top"><input class="check" type="checkbox" data-w="'+id+'" '+(s[id]?"checked":"")+' onchange="toggleWorkout(this)"><div><div class="ex-name">'+e[0]+'</div><div class="sets">'+e[1]+'</div><div class="tags"><span class="pill primary">Primary: '+e[2]+'</span>'+(e[3]!=="—"?'<span class="pill secondary">Secondary: '+e[3]+'</span>':"")+'</div><div class="note">'+e[4]+'</div></div></div></div>'});if(activeDay==="Thu")h+='<div class="card"><div class="tip">Abs are intentionally trained Thursday and Saturday. Direct ab work builds the muscle; visible definition also depends on overall body composition.</div></div>';c.innerHTML=h}
-function toggleWorkout(el){let s=getState();s[el.dataset.w]=el.checked;setState(s);updateWeek()}function resetWorkout(){let s=getState();Object.keys(s).filter(k=>/^(Mon|Tue|Thu|Sat)_/.test(k)).forEach(k=>delete s[k]);setState(s);renderWorkout();updateWeek()}
-function updateWeek(){let s=getState(),done=0,total=0;Object.entries(plans).forEach(([d,p])=>p.ex.forEach((_,i)=>{total++;if(s[d+"_"+i])done++}));let pct=Math.round(done/total*100);document.getElementById("weekPct").textContent=pct+"%";document.getElementById("weekBar").style.width=pct+"%"}
-function todayText(){let d=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date().getDay()];return{Mon:"Push — chest, shoulders and triceps.",Tue:"Pull — lats, back thickness, rear delts and biceps.",Thu:"Legs + abs — complete lower body and core.",Sat:"Upper Lookmax — chest, back, delts, arms and abs.",Wed:"Recovery — walk, mobility and sleep.",Fri:"Rest — recover.",Sun:"Rest / meal prep."}[d]}
-function saveProgress(){localStorage.setItem("lmhub_progress",JSON.stringify({weight:weightInput.value,waist:waistInput.value}));alert("Saved.")}function saveNotes(){localStorage.setItem("lmhub_notes",notes.value);alert("Saved.")}
-document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(b.dataset.page).classList.add("active");window.scrollTo({top:0,behavior:"smooth"})});document.querySelectorAll(".habit").forEach(x=>x.onchange=()=>{let s=getState();s[x.dataset.key]=x.checked;setState(s)});
-(function(){document.getElementById("todayFocus").textContent=todayText();renderTabs();renderWorkout();updateWeek();let s=getState();document.querySelectorAll(".habit").forEach(x=>x.checked=!!s[x.dataset.key]);try{let p=JSON.parse(localStorage.getItem("lmhub_progress")||"{}");weightInput.value=p.weight||"";waistInput.value=p.waist||"";notes.value=localStorage.getItem("lmhub_notes")||""}catch(e){}})();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="theme-color" content="#090a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>LookMax & Training Hub</title>
+    <style>
+        :root {
+            --bg: #090a0f;
+            --card: #151720;
+            --line: #292d39;
+            --text: #f5f6fa;
+            --muted: #9da3b2;
+            --accent: #8b5cf6;
+            --green: #34d399;
+            --blue: #60a5fa;
+            --yellow: #f59e0b;
+            --radius: 20px
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, Arial, sans-serif;
+            padding-bottom: 90px
+        }
+
+        .app {
+            max-width: 900px;
+            margin: auto;
+            padding: 18px 14px 100px
+        }
+
+        header {
+            padding: 6px 2px 18px
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 800;
+            letter-spacing: .09em;
+            text-transform: uppercase
+        }
+
+        h1 {
+            font-size: 29px;
+            margin: 5px 0
+        }
+
+        .sub,
+        .note {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45
+        }
+
+        .page {
+            display: none
+        }
+
+        .page.active {
+            display: block
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+
+        .card {
+            background: linear-gradient(180deg, var(--card), #11131a);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 30px #0005
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin: 0 0 9px
+        }
+
+        .card h3 {
+            font-size: 15px;
+            margin: 14px 0 5px
+        }
+
+        .stat {
+            font-size: 25px;
+            font-weight: 800
+        }
+
+        .label {
+            font-size: 11px;
+            color: var(--muted)
+        }
+
+        .pill {
+            display: inline-block;
+            border: 1px solid var(--line);
+            background: #fff1;
+            color: #d9dce5;
+            border-radius: 999px;
+            padding: 5px 9px;
+            font-size: 10px;
+            margin: 3px 3px 0 0
+        }
+
+        .pill.primary {
+            border-color: #8b5cf655;
+            color: #c4b5fd;
+            background: #8b5cf612
+        }
+
+        .pill.secondary {
+            border-color: #60a5fa44;
+            color: #a9c9ff
+        }
+
+        .pill.core {
+            border-color: #34d39944;
+            color: #86efac
+        }
+
+        .pill.priority {
+            border-color: #f59e0b55;
+            color: #fbbf24
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 18px 2px 9px
+        }
+
+        .section-title h2 {
+            font-size: 18px;
+            margin: 0
+        }
+
+        .smallbtn {
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: #fff;
+            border-radius: 10px;
+            padding: 7px 10px;
+            font-size: 12px
+        }
+
+        .daytabs {
+            display: flex;
+            gap: 7px;
+            overflow: auto;
+            padding: 2px 0 12px;
+            scrollbar-width: none
+        }
+
+        .daytabs button {
+            background: var(--card);
+            border: 1px solid var(--line);
+            color: var(--muted);
+            border-radius: 13px;
+            padding: 9px 13px
+        }
+
+        .daytabs button.active {
+            background: #8b5cf620;
+            border-color: #8b5cf677;
+            color: #fff
+        }
+
+        .exercise {
+            border: 1px solid var(--line);
+            border-radius: 17px;
+            padding: 13px;
+            margin: 9px 0;
+            background: #ffffff03
+        }
+
+        .ex-top {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start
+        }
+
+        .check {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--accent);
+            flex: 0 0 auto
+        }
+
+        .ex-name {
+            font-weight: 750;
+            font-size: 15px
+        }
+
+        .sets {
+            font-size: 13px;
+            color: #c7cad3;
+            margin-top: 3px
+        }
+
+        .tags {
+            margin-top: 5px
+        }
+
+        .tip {
+            border-left: 3px solid var(--accent);
+            padding-left: 11px;
+            color: #d7d9e1;
+            font-size: 13px;
+            line-height: 1.5
+        }
+
+        .progressbar {
+            height: 8px;
+            background: #262a34;
+            border-radius: 99px;
+            overflow: hidden
+        }
+
+        .progressbar i {
+            display: block;
+            height: 100%;
+            background: var(--accent);
+            width: 0
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin: 7px 0
+        }
+
+        .metric span:last-child {
+            font-weight: 700
+        }
+
+        .nav {
+            position: fixed;
+            z-index: 10;
+            left: 50%;
+            bottom: 8px;
+            transform: translateX(-50%);
+            width: min(95%, 690px);
+            background: #151720ee;
+            border: 1px solid #303441;
+            backdrop-filter: blur(18px);
+            border-radius: 22px;
+            padding: 8px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            box-shadow: 0 12px 40px #0008
+        }
+
+        .nav button {
+            background: none;
+            border: 0;
+            color: #858b99;
+            font-size: 10px;
+            padding: 6px 2px;
+            border-radius: 14px
+        }
+
+        .nav button.active {
+            color: #fff;
+            background: #ffffff0c
+        }
+
+        .nav b {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 2px
+        }
+
+        ul {
+            padding-left: 19px;
+            color: #c9ccd5;
+            font-size: 13px;
+            line-height: 1.55
+        }
+
+        li {
+            margin: 4px 0
+        }
+
+        .svgbox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 190px;
+            background: #0d0f15;
+            border: 1px solid var(--line);
+            border-radius: 18px
+        }
+
+        .muscle {
+            fill: #383d49;
+            stroke: #697080;
+            stroke-width: 1
+        }
+
+        .hot {
+            fill: #8b5cf6;
+            stroke: #c4b5fd
+        }
+
+        .bodylabel {
+            font-size: 11px;
+            fill: #cdd1db
+        }
+
+        .checkrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 14px
+        }
+
+        .checkrow input {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent)
+        }
+
+        .meal {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .meal:last-child {
+            border: 0
+        }
+
+        .meal strong {
+            font-size: 14px
+        }
+
+        .meal span {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: right
+        }
+
+        textarea,
+        input[type=number] {
+            width: 100%;
+            background: #0e1016;
+            color: #fff;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 9px
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical
+        }
+
+        @media(max-width:600px) {
+            h1 {
+                font-size: 27px
+            }
+
+            .grid {
+                gap: 9px
+            }
+
+            .card {
+                padding: 14px
+            }
+
+            .nav {
+                bottom: 6px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <header>
+            <div class="eyebrow">Personal transformation system</div>
+            <h1>LookMax & Training Hub</h1>
+            <div class="sub">Lean athletic physique • V-taper • upper chest • shoulders • back • arms • core • grooming
+            </div>
+        </header>
+        <section id="dashboard" class="page active">
+            <div class="grid">
+                <div class="card">
+                    <div class="label">Current weight</div>
+                    <div class="stat">~72 kg</div>
+                    <div class="label">Track weekly average</div>
+                </div>
+                <div class="card">
+                    <div class="label">Height</div>
+                    <div class="stat">5'8"</div>
+                    <div class="label">Goal: recomposition</div>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Today's focus</h2>
+                <div id="todayFocus" class="tip"></div>
+            </div>
+            <div class="card">
+                <h2>Transformation priorities</h2><span class="pill priority">Lateral delts</span><span
+                    class="pill priority">Lats / V-taper</span><span class="pill priority">Upper chest</span><span
+                    class="pill">Rear delts</span><span class="pill">Arms</span><span class="pill">Abs</span><span
+                    class="pill">Legs</span>
+            </div>
+            <div class="card">
+                <h2>Weekly completion</h2>
+                <div class="metric"><span>Workout checkboxes</span><span id="weekPct">0%</span></div>
+                <div class="progressbar"><i id="weekBar"></i></div>
+            </div>
+            <div class="card">
+                <h2>Training rules</h2>
+                <ul>
+                    <li>Most working sets: finish with about 1–3 reps in reserve.</li>
+                    <li>Double progression: reach the top of the rep range on all sets, then add a small amount of
+                        weight.</li>
+                    <li>Use controlled reps and a full comfortable range of motion.</li>
+                    <li>Do not add random exercises just to make the workout longer.</li>
+                    <li>Optional cardio: 15–25 min easy incline walking or 20–30 min cycling.</li>
+                </ul>
+            </div>
+        </section>
+        <section id="workout" class="page">
+            <div class="section-title">
+                <h2>Final weekly gym plan</h2><button class="smallbtn" onclick="resetWorkout()">Reset checks</button>
+            </div>
+            <div class="daytabs" id="dayTabs"></div>
+            <div id="workoutContent"></div>
+            <div class="card">
+                <h2>Equipment</h2>
+                <div class="sub">Dumbbells • Smith/barbell • adjustable bench • cable functional trainer • pull-up bar •
+                    treadmill/cycle</div>
+            </div>
+        </section>
+        <section id="muscles" class="page">
+            <div class="card">
+                <h2>Lookmax muscle map</h2>
+                <div class="sub">Priority areas are highlighted. This is a training reference, not an anatomical
+                    diagnostic.</div>
+                <div class="svgbox"><svg viewBox="0 0 300 250" width="100%" height="250">
+                        <circle cx="150" cy="38" r="22" class="muscle" />
+                        <path d="M128 62Q150 53 172 62L190 83 177 112 164 80 150 88 136 80 123 112 110 83Z"
+                            class="muscle" />
+                        <path d="M136 80 116 70 91 83 102 98 127 91Z" class="hot" />
+                        <path d="M164 80 184 70 209 83 198 98 173 91Z" class="hot" />
+                        <path d="M127 86 150 88 173 86 166 119 150 126 134 119Z" class="hot" />
+                        <path d="M134 119 150 126 166 119 169 166 151 181 131 166Z" class="hot" />
+                        <path d="M131 166 151 181 145 231 123 231 117 193Z" class="muscle" />
+                        <path d="M169 166 149 181 155 231 177 231 183 193Z" class="muscle" /><text x="12" y="245"
+                            class="bodylabel">Chest • delts • core • quads</text>
+                    </svg></div>
+                <div style="margin-top:8px"><span class="pill priority">Lateral delts</span><span
+                        class="pill priority">Upper chest</span><span class="pill priority">Lats</span><span
+                        class="pill">Rear delts</span><span class="pill core">Core</span></div>
+            </div>
+            <div class="card">
+                <h2>Back coverage</h2>
+                <ul>
+                    <li><b>Lat width:</b> pull-ups + pulldown + straight-arm pulldown.</li>
+                    <li><b>Back thickness:</b> seated cable row + one-arm DB row.</li>
+                    <li><b>Rear shoulders:</b> rear-delt fly.</li>
+                    <li>Both vertical and horizontal pulling are included.</li>
+                </ul>
+            </div>
+        </section>
+        <section id="nutrition" class="page">
+            <div class="card">
+                <h2>Recomposition nutrition</h2>
+                <div class="metric"><span>Protein</span><span>~115–130 g/day</span></div>
+                <div class="metric"><span>Strategy</span><span>Maintenance / small deficit</span></div>
+                <div class="metric"><span>Priority</span><span>Protein + whole foods + consistency</span></div>
+                <div class="tip">You do not need a dirty bulk. Keep body weight roughly stable initially and use waist,
+                    photos, strength and weekly averages to adjust.</div>
+            </div>
+            <div class="card">
+                <h2>Bachelor-friendly template</h2>
+                <div class="meal">
+                    <div><strong>Pre-gym</strong><br><span>Banana + water</span></div><span>Optional oats/milk if
+                        hungry</span>
+                </div>
+                <div class="meal">
+                    <div><strong>Post-gym</strong><br><span>Oats + milk + eggs</span></div><span>Whey if needed for
+                        protein</span>
+                </div>
+                <div class="meal">
+                    <div><strong>Lunch</strong><br><span>Chicken + oats/rice/chapati + vegetable + curd</span></div>
+                    <span>Protein-centered</span>
+                </div>
+                <div class="meal">
+                    <div><strong>Dinner</strong><br><span>Chicken/paneer/rajma/meal maker + chapati + vegetable</span>
+                    </div><span>Rotate proteins</span>
+                </div>
+            </div>
+            <div class="card">
+                <h2>Foods you can rotate</h2>
+                <div class="sub">Chicken • eggs • whey • paneer • rajma • toor dal • meal maker/soya • milk • curd •
+                    oats • banana • sweet potato • potato • okra • dondakay/ivy gourd • beerakaya/ridge gourd • onion •
+                    tomato • green chilli • other vegetables/fruit</div>
+            </div>
+            <div class="card">
+                <h2>Simple chicken cooking</h2>
+                <h3>Air fryer</h3>
+                <div class="sub">Cut evenly, season, use a little oil, air-fry around 375–400°F and verify the thickest
+                    piece reaches 165°F. Time varies by piece size and appliance.</div>
+                <h3>Pressure-cooker curry</h3>
+                <div class="sub">Sauté onion + tomato + spices, add chicken and a little water, pressure-cook according
+                    to the cooker/manual, then verify 165°F internally. Cool promptly and refrigerate in shallow
+                    containers.</div>
+            </div>
+        </section>
+        <section id="skin" class="page">
+            <div class="card">
+                <h2>AM skincare</h2>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="amClean">Cleanser</div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="amVitC">Vitamin C 10% if tolerated
+                </div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="amMoist">Moisturizer as needed
+                </div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="amSpf">Broad-spectrum SPF 30+ daily
+                </div>
+            </div>
+            <div class="card">
+                <h2>PM skincare</h2>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="pmClean">Cleanser</div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="pmNiac">Niacinamide if tolerated
+                </div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="pmMoist">Moisturizer</div>
+            </div>
+            <div class="card">
+                <h2>Skin rules</h2>
+                <ul>
+                    <li>Introduce one new active at a time.</li>
+                    <li>If an active causes persistent burning/redness, stop and simplify.</li>
+                    <li>Sun protection is the key daily step for tanning/PIH management.</li>
+                    <li>Recurring itchy bumps should be assessed by a clinician/dermatologist rather than assumed to be
+                        “body heat.”</li>
+                </ul>
+            </div>
+        </section>
+        <section id="habits" class="page">
+            <div class="card">
+                <h2>Daily checklist</h2>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="protein">Protein target</div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="water">Adequate fluids</div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="steps">Daily movement / walk</div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="posture">5-min posture routine
+                </div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="sleep">7–9 h sleep opportunity
+                </div>
+                <div class="checkrow"><input type="checkbox" class="habit" data-key="mealprep">Controlled meals / prep
+                </div>
+            </div>
+            <div class="card">
+                <h2>5-minute posture routine</h2>
+                <ul>
+                    <li>Chin tucks — 2 × 10</li>
+                    <li>Door-frame chest stretch — 30 sec/side</li>
+                    <li>Gentle thoracic mobility</li>
+                    <li>Stand and move every ~45–60 min during desk work</li>
+                </ul>
+            </div>
+        </section>
+        <section id="progress" class="page">
+            <div class="card">
+                <h2>Progress log</h2>
+                <div class="sub">Use trends, not single-day fluctuations.</div>
+                <div class="checkrow"><label style="width:100%">Weekly average weight (kg)<input id="weightInput"
+                            type="number" step="0.1" placeholder="72.0" style="margin-top:6px"></label></div>
+                <div class="checkrow"><label style="width:100%">Waist (cm)<input id="waistInput" type="number"
+                            step="0.1" placeholder="measure weekly" style="margin-top:6px"></label></div><button
+                    class="smallbtn" onclick="saveProgress()">Save</button>
+            </div>
+            <div class="card">
+                <h2>Track</h2>
+                <ul>
+                    <li>Weekly average weight</li>
+                    <li>Waist measurement</li>
+                    <li>Bench, row, pulldown, squat and RDL performance</li>
+                    <li>Front/side/back photos every 3–4 weeks in similar lighting</li>
+                    <li>Shoulder/waist clothing fit</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h2>Long-term principle</h2>
+                <div class="tip">Muscle and strength require continued resistance training to maintain fully. A long
+                    break can reduce them, but returning to training is generally easier than starting from zero. No
+                    supplement permanently preserves training adaptations.</div>
+            </div>
+            <div class="card"><textarea id="notes" placeholder="Weekly notes..."></textarea><button class="smallbtn"
+                    style="margin-top:8px" onclick="saveNotes()">Save notes</button></div>
+        </section>
+        <nav class="nav"><button data-page="dashboard" class="active"><b>⌂</b>Home</button><button
+                data-page="workout"><b>🏋</b>Workout</button><button data-page="muscles"><b>◉</b>Map</button><button
+                data-page="nutrition"><b>🍽</b>Food</button><button data-page="skin"><b>✦</b>Skin</button><button
+                data-page="habits"><b>✓</b>Habits</button></nav>
+    </div>
+    <script>
+        const plans = { Mon: { title: "MONDAY — PUSH", subtitle: "Chest + Shoulders + Triceps", ex: [["Smith/Barbell Flat Bench Press", "3 × 6–10", "Chest", "Front delts • Triceps", "Primary flat press."], ["Incline Dumbbell Press", "3 × 8–12", "Upper chest", "Front delts • Triceps", "High-priority upper chest."], ["Seated DB Shoulder Press", "2 × 8–12", "Front delts", "Triceps", "Controlled reps."], ["Cable Lateral Raise", "4 × 12–20", "Lateral delts", "—", "HIGH PRIORITY for shoulder width."], ["Cable/Dumbbell Chest Fly", "2 × 12–15", "Chest", "—", "Controlled stretch."], ["Rope Triceps Pushdown", "3 × 10–15", "Triceps", "—", "Full elbow extension."], ["Cable Overhead Triceps Extension", "2 × 10–15", "Triceps long head", "—", "Pain-free range."]] }, Tue: { title: "TUESDAY — PULL", subtitle: "Lats + Back Thickness + Rear Delts + Biceps", ex: [["Pull-Ups", "3 × 6–10", "Lats", "Biceps • Upper back", "Use controlled negatives if needed."], ["Cable Lat Pulldown", "3 × 8–12", "Lats", "Biceps", "Pull toward upper chest."], ["Seated Cable Row", "3 × 8–12", "Mid-back", "Lats • Rear delts", "Avoid shrugging."], ["One-Arm Dumbbell Row", "2 × 10–12 / side", "Lats + mid-back", "Biceps", "Unilateral work."], ["Straight-Arm Cable Pulldown", "2 × 12–15", "Lats", "Core", "Focus on lat contraction."], ["Cable Rear-Delt Fly", "3 × 15–20", "Rear delts", "Upper back", "Light and controlled."], ["DB/Cable Curl", "2 × 10–12", "Biceps", "Forearms", "No swinging."], ["Hammer Curl", "2 × 10–12", "Brachialis + biceps", "Forearms", "Neutral grip."]] }, Thu: { title: "THURSDAY — LEGS + ABS", subtitle: "Quads + Hamstrings + Glutes + Complete Core", ex: [["Smith Squat", "3 × 6–10", "Quads", "Glutes • Core", "Safe controlled depth."], ["DB/Smith Romanian Deadlift", "3 × 8–12", "Hamstrings", "Glutes • Spinal erectors", "Hip hinge; neutral spine."], ["Bulgarian Split Squat", "2 × 8–12 / leg", "Quads + glutes", "Core", "Use DBs if appropriate."], ["Cable Leg Curl", "2 × 10–15", "Hamstrings", "—", "Use ankle attachment if available."], ["Standing Calf Raise", "3 × 12–20", "Calves", "—", "Pause at stretch."], ["Hanging Knee/Leg Raise", "3 × 10–15", "Abs", "Hip flexors", "Progress toward straighter legs."], ["Cable Crunch", "3 × 10–15", "Abs", "—", "Curl torso, don't pull with arms."], ["Pallof Press", "2 × 10–15 / side", "Core", "Obliques", "Anti-rotation."]] }, Sat: { title: "SATURDAY — UPPER LOOKMAX", subtitle: "Chest + Back + Delts + Arms + Abs", ex: [["Incline Dumbbell Press", "3 × 8–12", "Upper chest", "Front delts • Triceps", "Second upper-chest stimulus."], ["Pull-Ups / Lat Pulldown", "3 × 8–12", "Lats", "Biceps", "Choose quality version."], ["Seated Cable Row", "2 × 10–12", "Mid-back", "Lats • Rear delts", "Second row exposure."], ["Cable Lateral Raise", "3 × 12–20", "Lateral delts", "—", "HIGH PRIORITY for width."], ["Rear-Delt Cable Fly", "2 × 15–20", "Rear delts", "Upper back", "Continuous tension."], ["Cable Chest Fly", "2 × 12–15", "Chest", "—", "Moderate load."], ["Hammer Curl", "2 × 10–12", "Brachialis + biceps", "Forearms", "Controlled."], ["Rope Triceps Pushdown", "2 × 10–15", "Triceps", "—", "Controlled lockout."], ["Cable Crunch", "3 × 10–15", "Abs", "—", "Direct weighted ab work."]] } };
+        let activeDay = "Mon"; function stateKey() { return "lmhub_" + new Date().toISOString().slice(0, 10) } function getState() { try { return JSON.parse(localStorage.getItem(stateKey()) || "{}") } catch (e) { return {} } } function setState(s) { localStorage.setItem(stateKey(), JSON.stringify(s)) }
+        function renderTabs() { let e = document.getElementById("dayTabs"); e.innerHTML = ""; Object.entries(plans).forEach(([d, p]) => { let b = document.createElement("button"); b.textContent = d; b.className = d === activeDay ? "active" : ""; b.onclick = () => { activeDay = d; renderTabs(); renderWorkout() }; e.appendChild(b) }) }
+        function renderWorkout() { let p = plans[activeDay], s = getState(), c = document.getElementById("workoutContent"), h = '<div class="card"><h2>' + p.title + '</h2><div class="sub">' + p.subtitle + '</div><div class="tip" style="margin-top:9px">Warm-up: 5–7 min treadmill/cycle + light warm-up sets before the first compound.</div></div>'; p.ex.forEach((e, i) => { let id = activeDay + "_" + i; h += '<div class="exercise"><div class="ex-top"><input class="check" type="checkbox" data-w="' + id + '" ' + (s[id] ? "checked" : "") + ' onchange="toggleWorkout(this)"><div><div class="ex-name">' + e[0] + '</div><div class="sets">' + e[1] + '</div><div class="tags"><span class="pill primary">Primary: ' + e[2] + '</span>' + (e[3] !== "—" ? '<span class="pill secondary">Secondary: ' + e[3] + '</span>' : "") + '</div><div class="note">' + e[4] + '</div></div></div></div>' }); if (activeDay === "Thu") h += '<div class="card"><div class="tip">Abs are intentionally trained Thursday and Saturday. Direct ab work builds the muscle; visible definition also depends on overall body composition.</div></div>'; c.innerHTML = h }
+        function toggleWorkout(el) { let s = getState(); s[el.dataset.w] = el.checked; setState(s); updateWeek() } function resetWorkout() { let s = getState(); Object.keys(s).filter(k => /^(Mon|Tue|Thu|Sat)_/.test(k)).forEach(k => delete s[k]); setState(s); renderWorkout(); updateWeek() }
+        function updateWeek() { let s = getState(), done = 0, total = 0; Object.entries(plans).forEach(([d, p]) => p.ex.forEach((_, i) => { total++; if (s[d + "_" + i]) done++ })); let pct = Math.round(done / total * 100); document.getElementById("weekPct").textContent = pct + "%"; document.getElementById("weekBar").style.width = pct + "%" }
+        function todayText() { let d = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][new Date().getDay()]; return { Mon: "Push — chest, shoulders and triceps.", Tue: "Pull — lats, back thickness, rear delts and biceps.", Thu: "Legs + abs — complete lower body and core.", Sat: "Upper Lookmax — chest, back, delts, arms and abs.", Wed: "Recovery — walk, mobility and sleep.", Fri: "Rest — recover.", Sun: "Rest / meal prep." }[d] }
+        function saveProgress() { localStorage.setItem("lmhub_progress", JSON.stringify({ weight: weightInput.value, waist: waistInput.value })); alert("Saved.") } function saveNotes() { localStorage.setItem("lmhub_notes", notes.value); alert("Saved.") }
+        document.querySelectorAll(".nav button").forEach(b => b.onclick = () => { document.querySelectorAll(".nav button").forEach(x => x.classList.remove("active")); b.classList.add("active"); document.querySelectorAll(".page").forEach(p => p.classList.remove("active")); document.getElementById(b.dataset.page).classList.add("active"); window.scrollTo({ top: 0, behavior: "smooth" }) }); document.querySelectorAll(".habit").forEach(x => x.onchange = () => { let s = getState(); s[x.dataset.key] = x.checked; setState(s) });
+        (function () { document.getElementById("todayFocus").textContent = todayText(); renderTabs(); renderWorkout(); updateWeek(); let s = getState(); document.querySelectorAll(".habit").forEach(x => x.checked = !!s[x.dataset.key]); try { let p = JSON.parse(localStorage.getItem("lmhub_progress") || "{}"); weightInput.value = p.weight || ""; waistInput.value = p.waist || ""; notes.value = localStorage.getItem("lmhub_notes") || "" } catch (e) { } })();
+    </script>
+</body>
+
+</html>
